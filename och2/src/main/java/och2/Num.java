@@ -1,24 +1,23 @@
-package och01;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
+package och2;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
- * Servlet implementation class Board
+ * Servlet implementation class Num
  */
-public class Board extends HttpServlet {
+public class Num extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Board() {
+    public Num() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,20 +26,18 @@ public class Board extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title = request.getParameter("title");
-		String writer = request.getParameter("writer");
-		String content = request.getParameter("content");
-		Date date = new Date();
+		int num1 = Integer.parseInt(request.getParameter("num1")); // 파라미터값 숫자로 가져오기
+		int num2 = Integer.parseInt(request.getParameter("num2")); // 파라미터값 숫자로 가져오기
+		float num3 = (float)num1/num2;
 		response.setContentType("text/html;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();
 		out.println("<html><body>");
-		out.println("<h1>게시판</h1>");
-		out.printf("제목 : %s<p>", title);
-		out.printf("작성자 : %s<p>", writer);
-		out.print("작성일 : " + date + "<p>");
-		out.printf("<h2>내용</h2>");
-		out.printf(content);
+		out.println("<h1>연산결과</h1>");
+		out.printf("덧셈 : %d + %d = %d<br>", num1, num2, (num1+num2));
+		out.printf("뺼셈 : %d - %d = %d<br>", num1, num2, (num1-num2));
+		out.printf("곱셈 : %d * %d = %d<br>", num1, num2, (num1*num2));
+		out.printf("나눗셈 : %d / %d = %f<br>", num1, num2, num3);
 		out.println("</body></html>");
 		out.close();
 
